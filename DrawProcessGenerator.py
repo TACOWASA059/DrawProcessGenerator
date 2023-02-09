@@ -106,12 +106,12 @@ class DrawProcessGenerator:
                 self.ax.imshow(img_masked_temp)
                 self.fig.savefig(self.directory+str(self.count)+".png",dpi=300,transparent=True)
                 self.count+=1
-            if div_numstep<len(indices[0])-1:
+            if div_num*step<len(indices[0])-1:
                 mask_temp = np.zeros(mask.shape, np.uint8)
-                mask_temp[indices[0][div_numstep:],indices[1][div_num*step:]] = 255
+                mask_temp[indices[0][div_num*step:],indices[1][div_num*step:]] = 255
                 img_masked_temp = cv2.bitwise_and(self.img, self.img, mask=mask_temp)
                 img_masked_temp = np.dstack((img_masked_temp, mask_temp))
-
+        
                 self.ax.imshow(img_masked_temp)
                 self.fig.savefig(self.directory+str(self.count)+".png",dpi=300,transparent=True)
                 self.count+=1
@@ -134,7 +134,7 @@ class DrawProcessGenerator:
 
 if __name__=="__main__":
     if len(sys.argv) < 2:
-        print("Usage: python script.py <filename>")
+        print("Usage: python DrawProcessGenerator.py <filename>")
         sys.exit()
     filename = sys.argv[1]
-    drawprocess=DrawProcessGenerator(filename=filename,output_directory="move1/")
+    drawprocess=DrawProcessGenerator(filename=filename,output_directory="move0/")
